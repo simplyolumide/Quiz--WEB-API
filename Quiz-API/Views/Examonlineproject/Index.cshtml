@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Quiz_API.Models.OnlineexamClass>
+@{
+    ViewBag.Title = "Index";
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<h2>Smart QuiZ Appx</h2>
+<h3>Test Your Knowledge</h3>
+<hr />
+
+@foreach(var item in Model)
+{
+    <table class="table">
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem=> item.Qid) 
+                @Html.DisplayFor(modelItem =>  item.Question)
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <input type="radio" id="Option1" name="@item.Qid" class="radiob" value="@item.Option1" />@item.Option1<br />
+                <input type="radio" id="Option2" name="@item.Qid" class="radiob" value="@item.Option2" />@item.Option2<br />
+                <input type="radio" id="Option3" name="@item.Qid" class="radiob" value="@item.Option3" />@item.Option3<br />
+                <input type="radio" id="Option4" name="@item.Qid" class="radiob" value="@item.Option4" />@item.Option4<br />
+                <label id="lab1" name="@item.Qid" class="radiob" style="display:none; color:forestgreen;">Correct Answer :@item.corrans   </label>
+             
+
+
+</tr>
+    </table>
+}
+
+<button type="button" id="but1" onclick="displayResults();">Submit</button>
+<hr />
+<script>
+    $(document).ready(function () {
+        $("#but1").click(function () {
+            $(".radiob").show();
+            $(radiob).attr("disabled", true);
+        });
+    });
+    
+    function displayResults() {
+        document.getElementById("labresult").innerHTML = "";
+
+        var e = document.getElementsByTagName('input');
+        for (i = 0; i < e.length; i++) {
+
+            if (e[i].type == "radio") {
+
+          
+            if (e[i].checked) {
+                document.getElementById("labresult".innerHTML += "Q" + e[i].name + ")" + "Your Selected Answer Is :" + e[i].value + "<br/>");
+
+            }
+
+        }
+
+        }
+
+    }
+</script>
